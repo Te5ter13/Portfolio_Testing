@@ -49,7 +49,7 @@ def test_auth_logout():
     pprint.pprint(data)
     pprint.pprint(headers)
     r = requests.post(url=logout_URI, headers=headers, data=data)
-    assert_that(r.status_code).is_equal_to(201)
+    assert_that(r.status_code).is_equal_to(200)
 
 
 def test_auth_register():
