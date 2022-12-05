@@ -1,0 +1,1 @@
+BASE_URI = 'YOUR_OWN_URL'
