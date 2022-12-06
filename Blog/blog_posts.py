@@ -48,26 +48,26 @@ def auth_header_token():
 
 def test_blog_delete():
     created_blogs = creating_blog_post()
-    slug = created_blogs.json()['slug']
-    #pprint.pprint(slug)
-    DELETE_URI = f'{BASE_URI}/blog/post-delete/{slug}/'
+    id = created_blogs.json()['id']
+    #pprint.pprint(id)
+    DELETE_URI = f'{BASE_URI}/blog/post-delete/{id}/'
     r = requests.delete(url=DELETE_URI, headers=auth_header_token())
     assert_that(r.status_code).is_equal_to(204)
 
 
 def test_blog_post_detail():
-    slug = creating_blog_post().json()['slug']
-    #pprint.pprint(slug)
-    detail_URI = f'{BASE_URI}/blog/post-detail/{slug}/'
+    id = creating_blog_post().json()['id']
+    #pprint.pprint(id)
+    detail_URI = f'{BASE_URI}/blog/post-detail/{id}/'
     r = requests.get(detail_URI)
     assert_that(r.status_code).is_not_none()
 
 
 def test_blog_post_update():
     blog_post, _ = blog_post_list()
-    slug = blog_post['Results'][0]['slug']
-    #pprint.pprint(slug)
-    update_URI = f'{BASE_URI}/blog/post-update/{slug}/'
+    id = blog_post['Results'][0]['id']
+    #pprint.pprint(id)
+    update_URI = f'{BASE_URI}/blog/post-update/{id}/'
     data = {
         'title': 'Updated Title',
         'content': 'Updated Content',

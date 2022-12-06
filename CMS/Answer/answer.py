@@ -2,10 +2,11 @@ import pprint
 import requests
 from config import BASE_URI
 from assertpy import assert_that
-
+from Blog.blog_posts import get_token_login
+from CMS.Questions.question import id_of_question_list
 def test_answer_list():
     r = answer_list()
-    #pprint.pprint(r.json())
+    pprint.pprint(id_of_answer())
     assert_that(r.status_code).is_equal_to(200)
 
 
@@ -18,12 +19,11 @@ def answer_list():
 def test_answer_create():
     create_URI = f'{BASE_URI}/cms/answer-create/'
     headers = {
-        'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjcwMjMzMDg5LCJpYXQiOjE2NzAxNDY2ODksImp0aSI6ImU3NmFkZWY2NDQ1NTRmZjdiYWE2NTJjYjBmNmU5OGFiIiwidXNlcl9pZCI6OSwidXNlcm5hbWUiOiJhZG1pbjEiLCJlbWFpbCI6ImFkbWluMUBnbWFpbC5jb20ifQ.rG-dYYWdeV4iY7FG_VAU1Tfw4RET4SNkG5d5rVaEx-U'
+        'Authorization': f'JWT {get_token_login()}'
     }
     data = {
-        'question': 1,
-        'answer': 'Not your concern',
-        'attended_user': 10
+        'question': {id_of_question_list()},
+        'answer': 'Not your concern'
     }
 
     r = requests.post(create_URI, data=data, headers=headers)
@@ -41,7 +41,7 @@ def test_answer_detail():
 
 
 def id_of_answer():
-    id = (answer_list().json())[1]['id']
+    id = (answer_list().json())[0]['id']
     return id
 
 

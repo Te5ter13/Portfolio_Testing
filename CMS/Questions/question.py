@@ -7,7 +7,7 @@ from Blog.blog_posts import auth_header_token
 
 def test_question_list():
     r = question_list()
-    pprint.pprint(r.json())
+    pprint.pprint(id_of_question_list())
     assert_that(r.status_code).is_equal_to(200)
 
 

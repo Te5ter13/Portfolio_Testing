@@ -8,6 +8,7 @@ from config import BASE_URI
 def test_auth_login():
     r = auth_login()
     assert_that(r.status_code).is_equal_to(200)
+    pprint.pprint(get_token_login())
 
 
 def auth_login():
@@ -55,9 +56,10 @@ def test_auth_logout():
 def test_auth_register():
     register_URI = f'{BASE_URI}/auth/register/'
     data = {
-        'email': 'email@gmail.com',
-        'username': 'emailMan',
-        'password': 'Password'
+        'email': 'manzilneup@gmail.com',
+        'username': 'Manjil123',
+        'password': 'Password',
+        'contact_number': '98765432111'
     }
     r = requests.post(url=register_URI, data=data)
     assert_that(r.status_code).is_equal_to(201)

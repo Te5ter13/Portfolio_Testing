@@ -2,7 +2,7 @@ import requests
 import pprint
 from assertpy import assert_that
 from config import BASE_URI
-
+from Blog.blog_posts import get_token_login
 
 def test_aboutus_list():
     r = list_aboutus()
@@ -20,7 +20,7 @@ def test_about_us_delete():
     #pprint.pprint(id)
     delete_URI = f'{BASE_URI}/cms/aboutus-delete/{id}/'
     headers = {
-        'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjcwMjI4MTQ5LCJpYXQiOjE2NzAxNDE3NDksImp0aSI6ImI1ZWUzMzdlMDJlZDRjMGVhZjdhNTliOGEzYTdlYTlkIiwidXNlcl9pZCI6OSwidXNlcm5hbWUiOiJhZG1pbjEiLCJlbWFpbCI6ImFkbWluMUBnbWFpbC5jb20ifQ.caZGOXNl7ZWrJ7YnArJQj36lqAvEMsUL3JLutHWi83E'
+        'Authorization': f'JWT {get_token_login()}'
     }
     r = requests.delete(delete_URI, headers=headers)
     assert_that(r.status_code).is_equal_to(204)
@@ -38,7 +38,7 @@ def test_aboutus_create():
         'content': 'This is my first content'
     }
     headers = {
-        'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjcwMjI2ODEwLCJpYXQiOjE2NzAxNDA0MTAsImp0aSI6IjUwMDhkNjBiMzdiZDRjOWRhOTE3M2E3NGIwZDk4NDc4IiwidXNlcl9pZCI6OSwidXNlcm5hbWUiOiJhZG1pbjEiLCJlbWFpbCI6ImFkbWluMUBnbWFpbC5jb20ifQ.zOOpNLFnWGnKLgs4JBM9Dc_SvjblRqectlXwf4Gt7NU'
+
     }
     r = requests.post(create_URI, data=data, headers=headers)
     assert_that(r.status_code).is_equal_to(201)
@@ -47,7 +47,7 @@ def test_aboutus_create():
 def test_aboutus_detail():
     about_id = id_of_aboutus()
     headers = {
-        'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjcwMjI4MTQ5LCJpYXQiOjE2NzAxNDE3NDksImp0aSI6ImI1ZWUzMzdlMDJlZDRjMGVhZjdhNTliOGEzYTdlYTlkIiwidXNlcl9pZCI6OSwidXNlcm5hbWUiOiJhZG1pbjEiLCJlbWFpbCI6ImFkbWluMUBnbWFpbC5jb20ifQ.caZGOXNl7ZWrJ7YnArJQj36lqAvEMsUL3JLutHWi83E'
+        'Authorization': f'JWT {get_token_login()}'
     }
     detail_URI = f'{BASE_URI}/cms/aboutus-detail/{about_id}/'
     r = requests.get(detail_URI, headers=headers)
@@ -59,7 +59,7 @@ def test_aboutus_update():
     aboutus_id = id_of_aboutus()
     updated_URI = f'{BASE_URI}/cms/aboutus-update/{aboutus_id}/'
     headers = {
-        'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjcwMjI4MTQ5LCJpYXQiOjE2NzAxNDE3NDksImp0aSI6ImI1ZWUzMzdlMDJlZDRjMGVhZjdhNTliOGEzYTdlYTlkIiwidXNlcl9pZCI6OSwidXNlcm5hbWUiOiJhZG1pbjEiLCJlbWFpbCI6ImFkbWluMUBnbWFpbC5jb20ifQ.caZGOXNl7ZWrJ7YnArJQj36lqAvEMsUL3JLutHWi83E'
+        'Authorization': f'JWT {get_token_login()}'
     }
     data = {
         'content': 'Here we see the changed content'
