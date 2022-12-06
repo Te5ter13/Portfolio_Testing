@@ -21,7 +21,7 @@ def listing_images():
 def test_cms_image_update():
     id = images_list_id()
     update_URI = f'{BASE_URI}/cms/image-update/{id}/'
-    with open(os.getcwd()+"/photos/bibek_bro.png", "rb") as image_file:
+    with open(os.getcwd()+"/photos/your_images.jpg", "rb") as image_file:
         files = {
             'image1': image_file
         }

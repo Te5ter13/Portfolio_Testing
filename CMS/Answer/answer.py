@@ -4,6 +4,8 @@ from config import BASE_URI
 from assertpy import assert_that
 from Blog.blog_posts import get_token_login
 from CMS.Questions.question import id_of_question_list
+
+
 def test_answer_list():
     r = answer_list()
     pprint.pprint(id_of_answer())

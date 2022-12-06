@@ -3,6 +3,8 @@ import random
 import requests
 from assertpy import assert_that
 from config import BASE_URI
+from Blog.blog_posts import auth_header_token
+
 
 def test_contact_me_list():
     r = contact_me_list()
@@ -31,15 +33,11 @@ def test_contact_me_create():
 
 def test_contact_me_delete():
     i = id_of_contact_list()
-    headers = {
-        'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjcwMjQwODU2LCJpYXQiOjE2NzAxNTQ0NTYsImp0aSI6ImZmN2IzNGJmZjY0MDRkZGNhMTczYjk0ZGMxN2U2NTM0IiwidXNlcl9pZCI6OSwidXNlcm5hbWUiOiJhZG1pbjEiLCJlbWFpbCI6ImFkbWluMUBnbWFpbC5jb20ifQ.Ii4wUz8Z2pvYDT3i6Hc1LqCcTLOuYwcQBYv6OTemoaQ'
-
-    }
     #pprint.pprint(id)
     id = random.choice(i)
     delete_URI = f'{BASE_URI}/cms/contact-me-delete/{id}/'
     #pprint.pprint(delete_URI)
-    r = requests.delete(url=delete_URI, headers=headers)
+    r = requests.delete(url=delete_URI, headers=auth_header_token())
     assert_that(r.status_code).is_equal_to(204)
 
 

@@ -14,8 +14,8 @@ def test_auth_login():
 def auth_login():
     login_URI = f'{BASE_URI}/auth/login/'
     data = {
-        'username': 'admin1',
-        'password': 'admin1'
+        'username': 'your_username',
+        'password': 'your_password'
     }
     r = requests.post(login_URI, data=data)
     return r
@@ -56,10 +56,10 @@ def test_auth_logout():
 def test_auth_register():
     register_URI = f'{BASE_URI}/auth/register/'
     data = {
-        'email': 'manzilneup@gmail.com',
-        'username': 'Manjil123',
-        'password': 'Password',
-        'contact_number': '98765432111'
+        'email': 'your_email',
+        'username': 'your_username',
+        'password': 'your_password',
+        'contact_number': 'contact_number'
     }
     r = requests.post(url=register_URI, data=data)
     assert_that(r.status_code).is_equal_to(201)
